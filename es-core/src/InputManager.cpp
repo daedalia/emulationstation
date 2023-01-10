@@ -71,11 +71,6 @@ void InputManager::init()
 	CECInput::init();
 	mCECInputConfig = new InputConfig(DEVICE_CEC, -1, "CEC", CEC_GUID_STRING, 0, 0, 0); // batocera
 	loadInputConfig(mCECInputConfig);
-
-	// Mouse input, hardcoded not configurable with es_input.cfg
-	mMouseButtonsInputConfig = new InputConfig(DEVICE_MOUSE, -1, "Mouse", CEC_GUID_STRING, 0, 0, 0);
-	mMouseButtonsInputConfig->mapInput(BUTTON_OK, Input(DEVICE_MOUSE, TYPE_BUTTON, 1, 1, true));
-	mMouseButtonsInputConfig->mapInput(BUTTON_BACK, Input(DEVICE_MOUSE, TYPE_BUTTON, 3, 1, true));
 }
 
 void InputManager::deinit()
