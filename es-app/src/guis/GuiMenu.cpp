@@ -1268,29 +1268,6 @@ void GuiMenu::openSystemSettings_batocera()
         });
 
 #if defined(RG552) || defined(handheld)
-
-          // Allow offlining all but 2/4/0 cores
-          auto optionsOffline = std::make_shared<OptionListComponent<std::string> >(mWindow, _("ENABLED CPU CORES"), false);
-          std::string selectedOffline = SystemConf::getInstance()->get("system.cores");
-          if (selectedOffline.empty())
-                selectedOffline = "all";
-
-          optionsOffline->add(_("ALL"),"all", selectedOffline == "all");
-          optionsOffline->add(_("FOUR"),"4", selectedOffline == "4");
-          optionsOffline->add(_("TWO"),"2", selectedOffline == "2");
-
-          s->addWithLabel(_("ENABLED CPU CORES"), optionsOffline);
-
-          s->addSaveFunc([optionsOffline, selectedOffline]
-          {
-            if (optionsOffline->changed()) {
-              SystemConf::getInstance()->set("system.cores", optionsOffline->getSelected());
-              runSystemCommand("/usr/bin/bash -lc \". /etc/profile; onlinecores " + optionsOffline->getSelected() + " 0" + "\"" , "", nullptr);
-              SystemConf::getInstance()->saveSystemConf();
-            }
-          });
-
-
 	  // Provides cooling profile switching
 	  auto optionsFanProfile = std::make_shared<OptionListComponent<std::string> >(mWindow, _("COOLING PROFILE"), false);
 	  std::string selectedFanProfile = SystemConf::getInstance()->get("cooling.profile");
